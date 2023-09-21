@@ -1,0 +1,36 @@
+﻿<div class="bounceInUp animated">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="glyphicon glyphicon-log-in"></span> Login to Timesheets</div>
+        <div class="panel-body">
+            <div class="alert alert-danger hidden text-center" id="loginAlert">{{loginAlertMessage}}</div>
+            <form name="loginForm" role="form" class="form-horizontal pull-left col-xs-12">
+                <div class="form-group">
+                    <label for="email" class="col-xs-4 control-label">Email</label>
+                    <div class="col-xs-8 col-md-6">
+                        <input type="email" id="email" name="email" ng-model="email" ng-trim="true" placeholder="Enter email" required class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="col-xs-4 control-label">Password</label>
+                    <div class="col-xs-8 col-md-6">
+                        <input type="password" ng-model="password" ng-trim="true" placeholder="Enter password" required class="form-control" />
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary col-xs-12" ng-disabled="loginFormValid()" ng-click="login()">Login</button>
+                </div>
+            </form>
+
+            <div class="row text-center">
+                <a href="#remind">Remind my password</a>
+            </div>
+            <div class="row text-center">
+                <a href="#register">Register as vendor</a>
+            </div>
+        </div>
+    </div>
+</div>

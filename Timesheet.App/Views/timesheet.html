@@ -1,0 +1,73 @@
+﻿<link href="Scripts/fullcalendar/fullcalendar.css" rel="stylesheet" />
+<link href="Scripts/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print">
+
+<script src="Scripts/fullcalendar/lib/jquery.min.js"></script>
+<script src="Scripts/fullcalendar/lib/jquery-ui.custom.min.js"></script>
+<script src="Scripts/fullcalendar/fullcalendar.min.js"></script>
+
+<script src="Scripts/addtouch.js"></script>
+
+<div class="bounceInUp animated">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-time"></span> <a href="#">Home</a> / <a href="#timesheets"> My Timesheets</a> / Modify
+        </div>
+        <div class="panel-body">
+            <div class="well well-sm text-center">
+                Please select range of days for your timesheet.
+            </div>
+            <div class="alert alert-danger hidden text-center" id="timesheetAlert">{{timesheetAlertMessage}}</div>
+            
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-disabled="id > 0">
+                    {{client}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li ng-repeat="client in clients"><a href="javascript: void(0)" ng-click="setClient(client.id, client.Client.UserName)">{{client.Client.UserName}}</a></li>
+                </ul>                
+            </div>
+
+            <a href="../timesheets.api/api/timesheet/?id={{id}}&type="><button type="button" class="btn btn-default col-sm-2 pull-right">Download</button></a>
+            
+            <div class="clearfix" />
+            <br />
+
+
+            <div class="col-sm-6">
+                <div id="calendar" class="row"></div>
+                
+                <div class="pull-left">
+                    <br />
+                    <div class="pull-left">
+                        <span>Comment</span>
+                    </div>
+                </div>
+                <textarea class="form-control col-sm-6" ng-model="comment" rows="3"></textarea>
+                <br />
+            </div>
+            <div class="col-sm-6"  id="dates" style="overflow-x: hidden; overflow-y: auto; height: 500px; padding-left: 50px;"></div>
+
+            <div class="hidden col-sm-offset-8" id="totalLabel">
+                <br /><br />
+                <h4 class="col-sm-3">Total:</h4><h4 class="col-sm-6" id="total"></h4>
+            </div>
+
+            <div class="clearfix" />
+            <br />
+
+            <form role="form" name="contractForm">
+                <div class="btn-group col-sm-6">
+                    <button type="button" class="col-sm-6 btn btn-primary" ng-if="user.type == 'Consultant' && (timesheet.TimesheetStatus == 'Pending' || timesheet.TimesheetStatus == 'Rejected')" ng-click=" save()">Save</button>
+                    <button type="button" class="btn btn-default col-sm-6" ng-click="gohome()">Cancel</button>
+                </div>
+                <div class="btn-group col-sm-6">
+                    <button type="button" class="btn btn-success col-sm-6" ng-if="user.type == 'Consultant' && (timesheet.TimesheetStatus == 'Pending')" ng-click="changeStatus(1)">Submit</button>
+                    <button type="button" class="btn btn-success col-sm-6" ng-if="user.type == 'Client'  && (timesheet.TimesheetStatus == 'Submitted' || timesheet.TimesheetStatus == 'Rejected')" ng-click="changeStatus(3)">Approve</button>
+                    <button type="button" class="btn btn-danger col-sm-6" ng-if="user.type == 'Client'  && (timesheet.TimesheetStatus == 'Submitted' || timesheet.TimesheetStatus == 'Approved')" ng-click="changeStatus(2)">Reject</button>
+                    <button type="button" class="btn btn-success col-sm-6" ng-if="user.type == 'Vendor' && timesheet.TimesheetStatus == 'Approved'" ng-click="changeStatus(4)">Process</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

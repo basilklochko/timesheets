@@ -1,0 +1,42 @@
+﻿<style>
+    .hovered:hover {
+        background-color: silver;
+        cursor: default;
+    }
+</style>
+
+<div class="bounceInUp animated">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-ok-sign"></span> <a href="#">Home</a> / My Contracts 
+            <a href="#addcontract" class="pull-right"><span class="glyphicon glyphicon-plus-sign"></span> Add New</a>
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-info hidden text-center" id="noContractsAlert">There are no contracts in your profile. Please use the Add New button to add.</div>            
+            <input type="text" class="form-control" ng-model="searchText" placeholder="Search for contract" value="{{searchText}}">
+            <div style="overflow-y: auto; padding-top:15px; padding-left:15px; padding-right:15px; height: 600px ">
+                <div class="row hovered" ng-repeat="contract in contracts | filter:searchText" style="padding-top:15px">
+                    <address>
+                        <div class="col-sm-3 col-md-5">                            
+                            <span class="glyphicon glyphicon-usd"></span> <strong>{{contract.Client.UserName}}</strong><br />
+                            {{contract.Client.Contact}}<br />
+                            <a href="mailto:{{contract.Client.Email}}">{{contract.Client.Email}}</a><br />
+                            {{contract.Client.Phone}}<br />
+                        </div>
+                        <div class="col-sm-3 col-md-5">
+                            <span class="glyphicon glyphicon-copyright-mark"></span> <strong>{{contract.Consultant.UserName}}</strong><br />
+                            {{contract.Consultant.Contact}}<br />
+                            <a href="mailto:{{contract.Consultant.Email}}">{{contract.Consultant.Email}}</a><br />
+                            {{contract.Consultant.Phone}}<br />
+                        </div>
+                        <div class="col-sm-4 col-md-2">
+                            <button type="button" class="btn btn-danger" ng-click="confirmdelete(contract.id)">Delete</button>
+                        </div>
+                        <div class="clearfix" />
+                        <hr />
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

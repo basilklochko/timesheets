@@ -1,0 +1,11 @@
+﻿<div class="bounceInUp animated">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-copyright-mark"></span> <a href="#">Home</a> / <a href="#consultants"> My Consultants</a> / Add New
+        </div>
+        <div class="panel-body">
+            <div class="alert hidden text-center" id="userAlert">{{userAlertMessage}}</div>
+            <div ng-include src="'views/user.html'" ng-init="user = { type: 4 }"></div>
+        </div>
+    </div>
+</div>

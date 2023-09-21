@@ -1,0 +1,54 @@
+﻿<form role="form" name="userForm" class="form-horizontal pull-left col-xs-12">
+    <div class="form-group">
+        <label for="userName" class="col-xs-4 control-label"><span style="color: red">*</span> Name</label>
+        <div class="col-xs-8 col-md-6">
+            <input type="text" class="form-control" ng-model="user.userName" required value="{{user.userName}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="contact" class="col-xs-4 control-label"><span style="color: red">*</span> Contact</label>
+        <div class="col-xs-8 col-md-6">
+            <input type="text" class="form-control" ng-model="user.contact" value="{{user.contact}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="col-xs-4 control-label"><span style="color: red">*</span> Email</label>
+        <div class="col-xs-8 col-md-6">
+            <input type="email" id="email" name="email" class="form-control" ng-model="user.email" required value="{{user.email}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address" class="col-xs-4 control-label">Address</label>
+        <div class="col-xs-8 col-md-6">
+            <input type="text" class="form-control" ng-model="user.address" value="{{user.address}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="phone" class="col-xs-4 control-label">Phone</label>
+        <div class="col-xs-8 col-md-6">
+            <input type="text" class="form-control" ng-model="user.phone" value="{{user.phone}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fax" class="col-xs-4 control-label">Fax</label>
+        <div class="col-xs-8 col-md-6">
+            <input type="text" class="form-control" ng-model="user.fax" value="{{user.fax}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="url" class="col-xs-4 control-label">Url</label>
+        <div class="col-xs-8 col-md-6">
+            <input type="url" class="form-control" ng-model="user.url" value="{{user.url}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="taxCode" class="col-xs-4 control-label">TaxCode</label>
+        <div class="col-xs-8 col-md-6">
+            <input type="text" class="form-control" ng-model="user.taxCode" value="{{user.taxCode}}">
+        </div>
+    </div>
+    <div class="btn-group col-xs-12">
+        <button type="submit" class="btn btn-primary col-xs-6" ng-click="save()" ng-disabled="userFormValid()">Save</button>
+        <button type="button" class="btn btn-default col-xs-6" ng-click="gohome()">Cancel</button>
+    </div>
+</form>

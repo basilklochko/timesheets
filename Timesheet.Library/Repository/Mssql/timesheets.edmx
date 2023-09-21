@@ -1,0 +1,2056 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="timesheetsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClientConsultant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorClientId" Type="int" Nullable="false" />
+          <Property Name="VendorConsultantId" Type="int" Nullable="false" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SecurityToken">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Timesheet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientConsultantId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TimesheetDay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimesheetId" Type="int" Nullable="false" />
+          <Property Name="Day" Type="date" Nullable="false" />
+          <Property Name="Worked" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="10" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Fax" Type="varchar" MaxLength="10" />
+          <Property Name="Url" Type="varchar" MaxLength="50" />
+          <Property Name="TaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="Logo" Type="varchar" MaxLength="50" />
+          <Property Name="Contact" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="VendorClient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VendorConsultant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="ConsultantId" Type="int" Nullable="false" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'timesheets.dbo.vwClientByConsultant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwClientByConsultant">
+          <Key>
+            <PropertyRef Name="ClientConsultantId" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="ConsultantId" />
+          </Key>
+          <Property Name="ClientConsultantId" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="10" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Fax" Type="varchar" MaxLength="10" />
+          <Property Name="Url" Type="varchar" MaxLength="50" />
+          <Property Name="TaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="Logo" Type="varchar" MaxLength="50" />
+          <Property Name="Contact" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'timesheets.dbo.vwClientConsultant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwClientConsultant">
+          <Key>
+            <PropertyRef Name="ClientConsultantId" />
+            <PropertyRef Name="ClientConsultantCreatedDTS" />
+            <PropertyRef Name="ClientConsultantUpdatedDTS" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ClientCreatedDTS" />
+            <PropertyRef Name="ClientUpdatedDTS" />
+            <PropertyRef Name="ClientEmail" />
+            <PropertyRef Name="ClientType" />
+            <PropertyRef Name="ClientUserName" />
+            <PropertyRef Name="ConsultantId" />
+            <PropertyRef Name="ConsultantCreatedDTS" />
+            <PropertyRef Name="ConsultantUpdatedDTS" />
+            <PropertyRef Name="ConsultantEmail" />
+            <PropertyRef Name="ConsultantType" />
+            <PropertyRef Name="ConsultantUserName" />
+            <PropertyRef Name="ClientVendorId" />
+            <PropertyRef Name="ConsultantVendorId" />
+          </Key>
+          <Property Name="ClientConsultantId" Type="int" Nullable="false" />
+          <Property Name="ClientConsultantCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="ClientConsultantUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ClientCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="ClientUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="ClientEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClientPassword" Type="varchar" MaxLength="10" />
+          <Property Name="ClientType" Type="int" Nullable="false" />
+          <Property Name="ClientUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClientAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ClientPhone" Type="varchar" MaxLength="10" />
+          <Property Name="ClientFax" Type="varchar" MaxLength="10" />
+          <Property Name="ClientUrl" Type="varchar" MaxLength="50" />
+          <Property Name="ClientTaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="ClientLogo" Type="varchar" MaxLength="50" />
+          <Property Name="ClientContact" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantId" Type="int" Nullable="false" />
+          <Property Name="ConsultantCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="ConsultantUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="ConsultantEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ConsultantPassword" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantType" Type="int" Nullable="false" />
+          <Property Name="ConsultantUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConsultantAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ConsultantPhone" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantFax" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantUrl" Type="varchar" MaxLength="50" />
+          <Property Name="ConsultantTaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantLogo" Type="varchar" MaxLength="50" />
+          <Property Name="ConsultantContact" Type="varchar" MaxLength="10" />
+          <Property Name="ClientVendorId" Type="int" Nullable="false" />
+          <Property Name="ConsultantVendorId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'timesheets.dbo.vwTimesheet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'timesheets.dbo.vwTimesheetClient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwTimesheetClient">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ClientConsultantId" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="EndDate" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="VendorId" />
+            <PropertyRef Name="VendorCreatedDTS" />
+            <PropertyRef Name="VendorUpdatedDTS" />
+            <PropertyRef Name="VendorEmail" />
+            <PropertyRef Name="VendorType" />
+            <PropertyRef Name="VendorUserName" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ClientCreatedDTS" />
+            <PropertyRef Name="ClientUpdatedDTS" />
+            <PropertyRef Name="ClientEmail" />
+            <PropertyRef Name="ClientType" />
+            <PropertyRef Name="ClientUserName" />
+            <PropertyRef Name="ConsultantId" />
+            <PropertyRef Name="ConsultantCreatedDTS" />
+            <PropertyRef Name="ConsultantUpdatedDTS" />
+            <PropertyRef Name="ConsultantEmail" />
+            <PropertyRef Name="ConsultantType" />
+            <PropertyRef Name="ConsultantUserName" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="ClientConsultantId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="Worked" Type="decimal" Precision="38" Scale="0" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="VendorCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="VendorUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="VendorEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="VendorPassword" Type="varchar" MaxLength="10" />
+          <Property Name="VendorType" Type="int" Nullable="false" />
+          <Property Name="VendorUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VendorAddress" Type="varchar" MaxLength="100" />
+          <Property Name="VendorPhone" Type="varchar" MaxLength="10" />
+          <Property Name="VendorFax" Type="varchar" MaxLength="10" />
+          <Property Name="VendorUrl" Type="varchar" MaxLength="50" />
+          <Property Name="VendorTaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="VendorLogo" Type="varchar" MaxLength="50" />
+          <Property Name="VendorContact" Type="varchar" MaxLength="50" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ClientCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="ClientUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="ClientEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClientPassword" Type="varchar" MaxLength="10" />
+          <Property Name="ClientType" Type="int" Nullable="false" />
+          <Property Name="ClientUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClientAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ClientPhone" Type="varchar" MaxLength="10" />
+          <Property Name="ClientFax" Type="varchar" MaxLength="10" />
+          <Property Name="ClientUrl" Type="varchar" MaxLength="50" />
+          <Property Name="ClientTaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="ClientLogo" Type="varchar" MaxLength="50" />
+          <Property Name="ClientContact" Type="varchar" MaxLength="50" />
+          <Property Name="ConsultantId" Type="int" Nullable="false" />
+          <Property Name="ConsultantCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="ConsultantUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="ConsultantEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ConsultantPassword" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantType" Type="int" Nullable="false" />
+          <Property Name="ConsultantUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConsultantAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ConsultantPhone" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantFax" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantUrl" Type="varchar" MaxLength="50" />
+          <Property Name="ConsultantTaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantLogo" Type="varchar" MaxLength="50" />
+          <Property Name="ConsultantContact" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'timesheets.dbo.vwTimesheetConsultant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwTimesheetConsultant">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ClientConsultantId" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="EndDate" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="VendorId" />
+            <PropertyRef Name="VendorCreatedDTS" />
+            <PropertyRef Name="VendorUpdatedDTS" />
+            <PropertyRef Name="VendorEmail" />
+            <PropertyRef Name="VendorType" />
+            <PropertyRef Name="VendorUserName" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ClientCreatedDTS" />
+            <PropertyRef Name="ClientUpdatedDTS" />
+            <PropertyRef Name="ClientEmail" />
+            <PropertyRef Name="ClientType" />
+            <PropertyRef Name="ClientUserName" />
+            <PropertyRef Name="ConsultantId" />
+            <PropertyRef Name="ConsultantCreatedDTS" />
+            <PropertyRef Name="ConsultantUpdatedDTS" />
+            <PropertyRef Name="ConsultantEmail" />
+            <PropertyRef Name="ConsultantType" />
+            <PropertyRef Name="ConsultantUserName" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="ClientConsultantId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="Worked" Type="decimal" Precision="38" Scale="0" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="VendorCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="VendorUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="VendorEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="VendorPassword" Type="varchar" MaxLength="10" />
+          <Property Name="VendorType" Type="int" Nullable="false" />
+          <Property Name="VendorUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VendorAddress" Type="varchar" MaxLength="100" />
+          <Property Name="VendorPhone" Type="varchar" MaxLength="10" />
+          <Property Name="VendorFax" Type="varchar" MaxLength="10" />
+          <Property Name="VendorUrl" Type="varchar" MaxLength="50" />
+          <Property Name="VendorTaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="VendorLogo" Type="varchar" MaxLength="50" />
+          <Property Name="VendorContact" Type="varchar" MaxLength="50" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ClientCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="ClientUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="ClientEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClientPassword" Type="varchar" MaxLength="10" />
+          <Property Name="ClientType" Type="int" Nullable="false" />
+          <Property Name="ClientUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClientAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ClientPhone" Type="varchar" MaxLength="10" />
+          <Property Name="ClientFax" Type="varchar" MaxLength="10" />
+          <Property Name="ClientUrl" Type="varchar" MaxLength="50" />
+          <Property Name="ClientTaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="ClientLogo" Type="varchar" MaxLength="50" />
+          <Property Name="ClientContact" Type="varchar" MaxLength="50" />
+          <Property Name="ConsultantId" Type="int" Nullable="false" />
+          <Property Name="ConsultantCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="ConsultantUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="ConsultantEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ConsultantPassword" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantType" Type="int" Nullable="false" />
+          <Property Name="ConsultantUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConsultantAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ConsultantPhone" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantFax" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantUrl" Type="varchar" MaxLength="50" />
+          <Property Name="ConsultantTaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantLogo" Type="varchar" MaxLength="50" />
+          <Property Name="ConsultantContact" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'timesheets.dbo.vwTimesheetVendor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwTimesheetVendor">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ClientConsultantId" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="EndDate" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="VendorId" />
+            <PropertyRef Name="VendorCreatedDTS" />
+            <PropertyRef Name="VendorUpdatedDTS" />
+            <PropertyRef Name="VendorEmail" />
+            <PropertyRef Name="VendorType" />
+            <PropertyRef Name="VendorUserName" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ClientCreatedDTS" />
+            <PropertyRef Name="ClientUpdatedDTS" />
+            <PropertyRef Name="ClientEmail" />
+            <PropertyRef Name="ClientType" />
+            <PropertyRef Name="ClientUserName" />
+            <PropertyRef Name="ConsultantId" />
+            <PropertyRef Name="ConsultantCreatedDTS" />
+            <PropertyRef Name="ConsultantUpdatedDTS" />
+            <PropertyRef Name="ConsultantEmail" />
+            <PropertyRef Name="ConsultantType" />
+            <PropertyRef Name="ConsultantUserName" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="ClientConsultantId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="Worked" Type="decimal" Precision="38" Scale="0" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="VendorCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="VendorUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="VendorEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="VendorPassword" Type="varchar" MaxLength="10" />
+          <Property Name="VendorType" Type="int" Nullable="false" />
+          <Property Name="VendorUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VendorAddress" Type="varchar" MaxLength="100" />
+          <Property Name="VendorPhone" Type="varchar" MaxLength="10" />
+          <Property Name="VendorFax" Type="varchar" MaxLength="10" />
+          <Property Name="VendorUrl" Type="varchar" MaxLength="50" />
+          <Property Name="VendorTaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="VendorLogo" Type="varchar" MaxLength="50" />
+          <Property Name="VendorContact" Type="varchar" MaxLength="50" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ClientCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="ClientUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="ClientEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClientPassword" Type="varchar" MaxLength="10" />
+          <Property Name="ClientType" Type="int" Nullable="false" />
+          <Property Name="ClientUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClientAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ClientPhone" Type="varchar" MaxLength="10" />
+          <Property Name="ClientFax" Type="varchar" MaxLength="10" />
+          <Property Name="ClientUrl" Type="varchar" MaxLength="50" />
+          <Property Name="ClientTaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="ClientLogo" Type="varchar" MaxLength="50" />
+          <Property Name="ClientContact" Type="varchar" MaxLength="50" />
+          <Property Name="ConsultantId" Type="int" Nullable="false" />
+          <Property Name="ConsultantCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="ConsultantUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="ConsultantEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ConsultantPassword" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantType" Type="int" Nullable="false" />
+          <Property Name="ConsultantUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConsultantAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ConsultantPhone" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantFax" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantUrl" Type="varchar" MaxLength="50" />
+          <Property Name="ConsultantTaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="ConsultantLogo" Type="varchar" MaxLength="50" />
+          <Property Name="ConsultantContact" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'timesheets.dbo.vwVendorClient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwVendorClient">
+          <Key>
+            <PropertyRef Name="VendorClientId" />
+            <PropertyRef Name="VendorId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="VendorClientCreatedDTS" />
+            <PropertyRef Name="VendorClientUpdatedDTS" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="VendorClientId" Type="int" Nullable="false" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="VendorClientCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="VendorClientUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="10" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Fax" Type="varchar" MaxLength="10" />
+          <Property Name="Url" Type="varchar" MaxLength="50" />
+          <Property Name="TaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="Logo" Type="varchar" MaxLength="50" />
+          <Property Name="Contact" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'timesheets.dbo.vwVendorConsultant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwVendorConsultant">
+          <Key>
+            <PropertyRef Name="VendorConsultantId" />
+            <PropertyRef Name="VendorId" />
+            <PropertyRef Name="ConsultantId" />
+            <PropertyRef Name="VendorConsultantCreatedDTS" />
+            <PropertyRef Name="VendorConsultantUpdatedDTS" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="VendorConsultantId" Type="int" Nullable="false" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="ConsultantId" Type="int" Nullable="false" />
+          <Property Name="VendorConsultantCreatedDTS" Type="date" Nullable="false" />
+          <Property Name="VendorConsultantUpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="CreatedDTS" Type="date" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="date" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="10" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Fax" Type="varchar" MaxLength="10" />
+          <Property Name="Url" Type="varchar" MaxLength="50" />
+          <Property Name="TaxCode" Type="varchar" MaxLength="10" />
+          <Property Name="Logo" Type="varchar" MaxLength="50" />
+          <Property Name="Contact" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_ClientConsultant_VendorClient">
+          <End Role="VendorClient" Type="Self.VendorClient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClientConsultant" Type="Self.ClientConsultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VendorClient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ClientConsultant">
+              <PropertyRef Name="VendorClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientConsultant_VendorConsultant">
+          <End Role="VendorConsultant" Type="Self.VendorConsultant" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClientConsultant" Type="Self.ClientConsultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VendorConsultant">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ClientConsultant">
+              <PropertyRef Name="VendorConsultantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SecurityToken_User">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SecurityToken" Type="Self.SecurityToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SecurityToken">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Timesheet_ClientConsultant">
+          <End Role="ClientConsultant" Type="Self.ClientConsultant" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Timesheet" Type="Self.Timesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientConsultant">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Timesheet">
+              <PropertyRef Name="ClientConsultantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimesheetDay_Timesheet">
+          <End Role="Timesheet" Type="Self.Timesheet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TimesheetDay" Type="Self.TimesheetDay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timesheet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimesheetDay">
+              <PropertyRef Name="TimesheetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorClient_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="VendorClient" Type="Self.VendorClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VendorClient">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorClient_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="VendorClient" Type="Self.VendorClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VendorClient">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorConsultant_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="VendorConsultant" Type="Self.VendorConsultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VendorConsultant">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorConsultant_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="VendorConsultant" Type="Self.VendorConsultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VendorConsultant">
+              <PropertyRef Name="ConsultantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="timesheetsModelStoreContainer">
+          <EntitySet Name="ClientConsultant" EntityType="Self.ClientConsultant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityToken" EntityType="Self.SecurityToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Timesheet" EntityType="Self.Timesheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimesheetDay" EntityType="Self.TimesheetDay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VendorClient" EntityType="Self.VendorClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VendorConsultant" EntityType="Self.VendorConsultant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwClientByConsultant" EntityType="Self.vwClientByConsultant" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwClientByConsultant].[ClientConsultantId] AS [ClientConsultantId], 
+    [vwClientByConsultant].[id] AS [id], 
+    [vwClientByConsultant].[CreatedDTS] AS [CreatedDTS], 
+    [vwClientByConsultant].[UpdatedDTS] AS [UpdatedDTS], 
+    [vwClientByConsultant].[Email] AS [Email], 
+    [vwClientByConsultant].[Password] AS [Password], 
+    [vwClientByConsultant].[Type] AS [Type], 
+    [vwClientByConsultant].[UserName] AS [UserName], 
+    [vwClientByConsultant].[Address] AS [Address], 
+    [vwClientByConsultant].[Phone] AS [Phone], 
+    [vwClientByConsultant].[Fax] AS [Fax], 
+    [vwClientByConsultant].[Url] AS [Url], 
+    [vwClientByConsultant].[TaxCode] AS [TaxCode], 
+    [vwClientByConsultant].[Logo] AS [Logo], 
+    [vwClientByConsultant].[Contact] AS [Contact], 
+    [vwClientByConsultant].[ConsultantId] AS [ConsultantId]
+    FROM [dbo].[vwClientByConsultant] AS [vwClientByConsultant]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwClientConsultant" EntityType="Self.vwClientConsultant" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwClientConsultant].[ClientConsultantId] AS [ClientConsultantId], 
+    [vwClientConsultant].[ClientConsultantCreatedDTS] AS [ClientConsultantCreatedDTS], 
+    [vwClientConsultant].[ClientConsultantUpdatedDTS] AS [ClientConsultantUpdatedDTS], 
+    [vwClientConsultant].[ClientId] AS [ClientId], 
+    [vwClientConsultant].[ClientCreatedDTS] AS [ClientCreatedDTS], 
+    [vwClientConsultant].[ClientUpdatedDTS] AS [ClientUpdatedDTS], 
+    [vwClientConsultant].[ClientEmail] AS [ClientEmail], 
+    [vwClientConsultant].[ClientPassword] AS [ClientPassword], 
+    [vwClientConsultant].[ClientType] AS [ClientType], 
+    [vwClientConsultant].[ClientUserName] AS [ClientUserName], 
+    [vwClientConsultant].[ClientAddress] AS [ClientAddress], 
+    [vwClientConsultant].[ClientPhone] AS [ClientPhone], 
+    [vwClientConsultant].[ClientFax] AS [ClientFax], 
+    [vwClientConsultant].[ClientUrl] AS [ClientUrl], 
+    [vwClientConsultant].[ClientTaxCode] AS [ClientTaxCode], 
+    [vwClientConsultant].[ClientLogo] AS [ClientLogo], 
+    [vwClientConsultant].[ClientContact] AS [ClientContact], 
+    [vwClientConsultant].[ConsultantId] AS [ConsultantId], 
+    [vwClientConsultant].[ConsultantCreatedDTS] AS [ConsultantCreatedDTS], 
+    [vwClientConsultant].[ConsultantUpdatedDTS] AS [ConsultantUpdatedDTS], 
+    [vwClientConsultant].[ConsultantEmail] AS [ConsultantEmail], 
+    [vwClientConsultant].[ConsultantPassword] AS [ConsultantPassword], 
+    [vwClientConsultant].[ConsultantType] AS [ConsultantType], 
+    [vwClientConsultant].[ConsultantUserName] AS [ConsultantUserName], 
+    [vwClientConsultant].[ConsultantAddress] AS [ConsultantAddress], 
+    [vwClientConsultant].[ConsultantPhone] AS [ConsultantPhone], 
+    [vwClientConsultant].[ConsultantFax] AS [ConsultantFax], 
+    [vwClientConsultant].[ConsultantUrl] AS [ConsultantUrl], 
+    [vwClientConsultant].[ConsultantTaxCode] AS [ConsultantTaxCode], 
+    [vwClientConsultant].[ConsultantLogo] AS [ConsultantLogo], 
+    [vwClientConsultant].[ConsultantContact] AS [ConsultantContact], 
+    [vwClientConsultant].[ClientVendorId] AS [ClientVendorId], 
+    [vwClientConsultant].[ConsultantVendorId] AS [ConsultantVendorId]
+    FROM [dbo].[vwClientConsultant] AS [vwClientConsultant]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwTimesheetClient" EntityType="Self.vwTimesheetClient" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwTimesheetClient].[id] AS [id], 
+    [vwTimesheetClient].[ClientConsultantId] AS [ClientConsultantId], 
+    [vwTimesheetClient].[Status] AS [Status], 
+    [vwTimesheetClient].[StartDate] AS [StartDate], 
+    [vwTimesheetClient].[EndDate] AS [EndDate], 
+    [vwTimesheetClient].[Comment] AS [Comment], 
+    [vwTimesheetClient].[CreatedDTS] AS [CreatedDTS], 
+    [vwTimesheetClient].[UpdatedDTS] AS [UpdatedDTS], 
+    [vwTimesheetClient].[Worked] AS [Worked], 
+    [vwTimesheetClient].[VendorId] AS [VendorId], 
+    [vwTimesheetClient].[VendorCreatedDTS] AS [VendorCreatedDTS], 
+    [vwTimesheetClient].[VendorUpdatedDTS] AS [VendorUpdatedDTS], 
+    [vwTimesheetClient].[VendorEmail] AS [VendorEmail], 
+    [vwTimesheetClient].[VendorPassword] AS [VendorPassword], 
+    [vwTimesheetClient].[VendorType] AS [VendorType], 
+    [vwTimesheetClient].[VendorUserName] AS [VendorUserName], 
+    [vwTimesheetClient].[VendorAddress] AS [VendorAddress], 
+    [vwTimesheetClient].[VendorPhone] AS [VendorPhone], 
+    [vwTimesheetClient].[VendorFax] AS [VendorFax], 
+    [vwTimesheetClient].[VendorUrl] AS [VendorUrl], 
+    [vwTimesheetClient].[VendorTaxCode] AS [VendorTaxCode], 
+    [vwTimesheetClient].[VendorLogo] AS [VendorLogo], 
+    [vwTimesheetClient].[VendorContact] AS [VendorContact], 
+    [vwTimesheetClient].[ClientId] AS [ClientId], 
+    [vwTimesheetClient].[ClientCreatedDTS] AS [ClientCreatedDTS], 
+    [vwTimesheetClient].[ClientUpdatedDTS] AS [ClientUpdatedDTS], 
+    [vwTimesheetClient].[ClientEmail] AS [ClientEmail], 
+    [vwTimesheetClient].[ClientPassword] AS [ClientPassword], 
+    [vwTimesheetClient].[ClientType] AS [ClientType], 
+    [vwTimesheetClient].[ClientUserName] AS [ClientUserName], 
+    [vwTimesheetClient].[ClientAddress] AS [ClientAddress], 
+    [vwTimesheetClient].[ClientPhone] AS [ClientPhone], 
+    [vwTimesheetClient].[ClientFax] AS [ClientFax], 
+    [vwTimesheetClient].[ClientUrl] AS [ClientUrl], 
+    [vwTimesheetClient].[ClientTaxCode] AS [ClientTaxCode], 
+    [vwTimesheetClient].[ClientLogo] AS [ClientLogo], 
+    [vwTimesheetClient].[ClientContact] AS [ClientContact], 
+    [vwTimesheetClient].[ConsultantId] AS [ConsultantId], 
+    [vwTimesheetClient].[ConsultantCreatedDTS] AS [ConsultantCreatedDTS], 
+    [vwTimesheetClient].[ConsultantUpdatedDTS] AS [ConsultantUpdatedDTS], 
+    [vwTimesheetClient].[ConsultantEmail] AS [ConsultantEmail], 
+    [vwTimesheetClient].[ConsultantPassword] AS [ConsultantPassword], 
+    [vwTimesheetClient].[ConsultantType] AS [ConsultantType], 
+    [vwTimesheetClient].[ConsultantUserName] AS [ConsultantUserName], 
+    [vwTimesheetClient].[ConsultantAddress] AS [ConsultantAddress], 
+    [vwTimesheetClient].[ConsultantPhone] AS [ConsultantPhone], 
+    [vwTimesheetClient].[ConsultantFax] AS [ConsultantFax], 
+    [vwTimesheetClient].[ConsultantUrl] AS [ConsultantUrl], 
+    [vwTimesheetClient].[ConsultantTaxCode] AS [ConsultantTaxCode], 
+    [vwTimesheetClient].[ConsultantLogo] AS [ConsultantLogo], 
+    [vwTimesheetClient].[ConsultantContact] AS [ConsultantContact]
+    FROM [dbo].[vwTimesheetClient] AS [vwTimesheetClient]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwTimesheetConsultant" EntityType="Self.vwTimesheetConsultant" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwTimesheetConsultant].[id] AS [id], 
+    [vwTimesheetConsultant].[ClientConsultantId] AS [ClientConsultantId], 
+    [vwTimesheetConsultant].[Status] AS [Status], 
+    [vwTimesheetConsultant].[StartDate] AS [StartDate], 
+    [vwTimesheetConsultant].[EndDate] AS [EndDate], 
+    [vwTimesheetConsultant].[Comment] AS [Comment], 
+    [vwTimesheetConsultant].[CreatedDTS] AS [CreatedDTS], 
+    [vwTimesheetConsultant].[UpdatedDTS] AS [UpdatedDTS], 
+    [vwTimesheetConsultant].[Worked] AS [Worked], 
+    [vwTimesheetConsultant].[VendorId] AS [VendorId], 
+    [vwTimesheetConsultant].[VendorCreatedDTS] AS [VendorCreatedDTS], 
+    [vwTimesheetConsultant].[VendorUpdatedDTS] AS [VendorUpdatedDTS], 
+    [vwTimesheetConsultant].[VendorEmail] AS [VendorEmail], 
+    [vwTimesheetConsultant].[VendorPassword] AS [VendorPassword], 
+    [vwTimesheetConsultant].[VendorType] AS [VendorType], 
+    [vwTimesheetConsultant].[VendorUserName] AS [VendorUserName], 
+    [vwTimesheetConsultant].[VendorAddress] AS [VendorAddress], 
+    [vwTimesheetConsultant].[VendorPhone] AS [VendorPhone], 
+    [vwTimesheetConsultant].[VendorFax] AS [VendorFax], 
+    [vwTimesheetConsultant].[VendorUrl] AS [VendorUrl], 
+    [vwTimesheetConsultant].[VendorTaxCode] AS [VendorTaxCode], 
+    [vwTimesheetConsultant].[VendorLogo] AS [VendorLogo], 
+    [vwTimesheetConsultant].[VendorContact] AS [VendorContact], 
+    [vwTimesheetConsultant].[ClientId] AS [ClientId], 
+    [vwTimesheetConsultant].[ClientCreatedDTS] AS [ClientCreatedDTS], 
+    [vwTimesheetConsultant].[ClientUpdatedDTS] AS [ClientUpdatedDTS], 
+    [vwTimesheetConsultant].[ClientEmail] AS [ClientEmail], 
+    [vwTimesheetConsultant].[ClientPassword] AS [ClientPassword], 
+    [vwTimesheetConsultant].[ClientType] AS [ClientType], 
+    [vwTimesheetConsultant].[ClientUserName] AS [ClientUserName], 
+    [vwTimesheetConsultant].[ClientAddress] AS [ClientAddress], 
+    [vwTimesheetConsultant].[ClientPhone] AS [ClientPhone], 
+    [vwTimesheetConsultant].[ClientFax] AS [ClientFax], 
+    [vwTimesheetConsultant].[ClientUrl] AS [ClientUrl], 
+    [vwTimesheetConsultant].[ClientTaxCode] AS [ClientTaxCode], 
+    [vwTimesheetConsultant].[ClientLogo] AS [ClientLogo], 
+    [vwTimesheetConsultant].[ClientContact] AS [ClientContact], 
+    [vwTimesheetConsultant].[ConsultantId] AS [ConsultantId], 
+    [vwTimesheetConsultant].[ConsultantCreatedDTS] AS [ConsultantCreatedDTS], 
+    [vwTimesheetConsultant].[ConsultantUpdatedDTS] AS [ConsultantUpdatedDTS], 
+    [vwTimesheetConsultant].[ConsultantEmail] AS [ConsultantEmail], 
+    [vwTimesheetConsultant].[ConsultantPassword] AS [ConsultantPassword], 
+    [vwTimesheetConsultant].[ConsultantType] AS [ConsultantType], 
+    [vwTimesheetConsultant].[ConsultantUserName] AS [ConsultantUserName], 
+    [vwTimesheetConsultant].[ConsultantAddress] AS [ConsultantAddress], 
+    [vwTimesheetConsultant].[ConsultantPhone] AS [ConsultantPhone], 
+    [vwTimesheetConsultant].[ConsultantFax] AS [ConsultantFax], 
+    [vwTimesheetConsultant].[ConsultantUrl] AS [ConsultantUrl], 
+    [vwTimesheetConsultant].[ConsultantTaxCode] AS [ConsultantTaxCode], 
+    [vwTimesheetConsultant].[ConsultantLogo] AS [ConsultantLogo], 
+    [vwTimesheetConsultant].[ConsultantContact] AS [ConsultantContact]
+    FROM [dbo].[vwTimesheetConsultant] AS [vwTimesheetConsultant]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwTimesheetVendor" EntityType="Self.vwTimesheetVendor" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwTimesheetVendor].[id] AS [id], 
+    [vwTimesheetVendor].[ClientConsultantId] AS [ClientConsultantId], 
+    [vwTimesheetVendor].[Status] AS [Status], 
+    [vwTimesheetVendor].[StartDate] AS [StartDate], 
+    [vwTimesheetVendor].[EndDate] AS [EndDate], 
+    [vwTimesheetVendor].[Comment] AS [Comment], 
+    [vwTimesheetVendor].[CreatedDTS] AS [CreatedDTS], 
+    [vwTimesheetVendor].[UpdatedDTS] AS [UpdatedDTS], 
+    [vwTimesheetVendor].[Worked] AS [Worked], 
+    [vwTimesheetVendor].[VendorId] AS [VendorId], 
+    [vwTimesheetVendor].[VendorCreatedDTS] AS [VendorCreatedDTS], 
+    [vwTimesheetVendor].[VendorUpdatedDTS] AS [VendorUpdatedDTS], 
+    [vwTimesheetVendor].[VendorEmail] AS [VendorEmail], 
+    [vwTimesheetVendor].[VendorPassword] AS [VendorPassword], 
+    [vwTimesheetVendor].[VendorType] AS [VendorType], 
+    [vwTimesheetVendor].[VendorUserName] AS [VendorUserName], 
+    [vwTimesheetVendor].[VendorAddress] AS [VendorAddress], 
+    [vwTimesheetVendor].[VendorPhone] AS [VendorPhone], 
+    [vwTimesheetVendor].[VendorFax] AS [VendorFax], 
+    [vwTimesheetVendor].[VendorUrl] AS [VendorUrl], 
+    [vwTimesheetVendor].[VendorTaxCode] AS [VendorTaxCode], 
+    [vwTimesheetVendor].[VendorLogo] AS [VendorLogo], 
+    [vwTimesheetVendor].[VendorContact] AS [VendorContact], 
+    [vwTimesheetVendor].[ClientId] AS [ClientId], 
+    [vwTimesheetVendor].[ClientCreatedDTS] AS [ClientCreatedDTS], 
+    [vwTimesheetVendor].[ClientUpdatedDTS] AS [ClientUpdatedDTS], 
+    [vwTimesheetVendor].[ClientEmail] AS [ClientEmail], 
+    [vwTimesheetVendor].[ClientPassword] AS [ClientPassword], 
+    [vwTimesheetVendor].[ClientType] AS [ClientType], 
+    [vwTimesheetVendor].[ClientUserName] AS [ClientUserName], 
+    [vwTimesheetVendor].[ClientAddress] AS [ClientAddress], 
+    [vwTimesheetVendor].[ClientPhone] AS [ClientPhone], 
+    [vwTimesheetVendor].[ClientFax] AS [ClientFax], 
+    [vwTimesheetVendor].[ClientUrl] AS [ClientUrl], 
+    [vwTimesheetVendor].[ClientTaxCode] AS [ClientTaxCode], 
+    [vwTimesheetVendor].[ClientLogo] AS [ClientLogo], 
+    [vwTimesheetVendor].[ClientContact] AS [ClientContact], 
+    [vwTimesheetVendor].[ConsultantId] AS [ConsultantId], 
+    [vwTimesheetVendor].[ConsultantCreatedDTS] AS [ConsultantCreatedDTS], 
+    [vwTimesheetVendor].[ConsultantUpdatedDTS] AS [ConsultantUpdatedDTS], 
+    [vwTimesheetVendor].[ConsultantEmail] AS [ConsultantEmail], 
+    [vwTimesheetVendor].[ConsultantPassword] AS [ConsultantPassword], 
+    [vwTimesheetVendor].[ConsultantType] AS [ConsultantType], 
+    [vwTimesheetVendor].[ConsultantUserName] AS [ConsultantUserName], 
+    [vwTimesheetVendor].[ConsultantAddress] AS [ConsultantAddress], 
+    [vwTimesheetVendor].[ConsultantPhone] AS [ConsultantPhone], 
+    [vwTimesheetVendor].[ConsultantFax] AS [ConsultantFax], 
+    [vwTimesheetVendor].[ConsultantUrl] AS [ConsultantUrl], 
+    [vwTimesheetVendor].[ConsultantTaxCode] AS [ConsultantTaxCode], 
+    [vwTimesheetVendor].[ConsultantLogo] AS [ConsultantLogo], 
+    [vwTimesheetVendor].[ConsultantContact] AS [ConsultantContact]
+    FROM [dbo].[vwTimesheetVendor] AS [vwTimesheetVendor]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwVendorClient" EntityType="Self.vwVendorClient" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwVendorClient].[VendorClientId] AS [VendorClientId], 
+    [vwVendorClient].[VendorId] AS [VendorId], 
+    [vwVendorClient].[ClientId] AS [ClientId], 
+    [vwVendorClient].[VendorClientCreatedDTS] AS [VendorClientCreatedDTS], 
+    [vwVendorClient].[VendorClientUpdatedDTS] AS [VendorClientUpdatedDTS], 
+    [vwVendorClient].[id] AS [id], 
+    [vwVendorClient].[CreatedDTS] AS [CreatedDTS], 
+    [vwVendorClient].[UpdatedDTS] AS [UpdatedDTS], 
+    [vwVendorClient].[Email] AS [Email], 
+    [vwVendorClient].[Password] AS [Password], 
+    [vwVendorClient].[Type] AS [Type], 
+    [vwVendorClient].[UserName] AS [UserName], 
+    [vwVendorClient].[Address] AS [Address], 
+    [vwVendorClient].[Phone] AS [Phone], 
+    [vwVendorClient].[Fax] AS [Fax], 
+    [vwVendorClient].[Url] AS [Url], 
+    [vwVendorClient].[TaxCode] AS [TaxCode], 
+    [vwVendorClient].[Logo] AS [Logo], 
+    [vwVendorClient].[Contact] AS [Contact]
+    FROM [dbo].[vwVendorClient] AS [vwVendorClient]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwVendorConsultant" EntityType="Self.vwVendorConsultant" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwVendorConsultant].[VendorConsultantId] AS [VendorConsultantId], 
+    [vwVendorConsultant].[VendorId] AS [VendorId], 
+    [vwVendorConsultant].[ConsultantId] AS [ConsultantId], 
+    [vwVendorConsultant].[VendorConsultantCreatedDTS] AS [VendorConsultantCreatedDTS], 
+    [vwVendorConsultant].[VendorConsultantUpdatedDTS] AS [VendorConsultantUpdatedDTS], 
+    [vwVendorConsultant].[id] AS [id], 
+    [vwVendorConsultant].[CreatedDTS] AS [CreatedDTS], 
+    [vwVendorConsultant].[UpdatedDTS] AS [UpdatedDTS], 
+    [vwVendorConsultant].[Email] AS [Email], 
+    [vwVendorConsultant].[Password] AS [Password], 
+    [vwVendorConsultant].[Type] AS [Type], 
+    [vwVendorConsultant].[UserName] AS [UserName], 
+    [vwVendorConsultant].[Address] AS [Address], 
+    [vwVendorConsultant].[Phone] AS [Phone], 
+    [vwVendorConsultant].[Fax] AS [Fax], 
+    [vwVendorConsultant].[Url] AS [Url], 
+    [vwVendorConsultant].[TaxCode] AS [TaxCode], 
+    [vwVendorConsultant].[Logo] AS [Logo], 
+    [vwVendorConsultant].[Contact] AS [Contact]
+    FROM [dbo].[vwVendorConsultant] AS [vwVendorConsultant]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ClientConsultant_VendorClient" Association="Self.FK_ClientConsultant_VendorClient">
+            <End Role="VendorClient" EntitySet="VendorClient" />
+            <End Role="ClientConsultant" EntitySet="ClientConsultant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientConsultant_VendorConsultant" Association="Self.FK_ClientConsultant_VendorConsultant">
+            <End Role="VendorConsultant" EntitySet="VendorConsultant" />
+            <End Role="ClientConsultant" EntitySet="ClientConsultant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SecurityToken_User" Association="Self.FK_SecurityToken_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="SecurityToken" EntitySet="SecurityToken" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timesheet_ClientConsultant" Association="Self.FK_Timesheet_ClientConsultant">
+            <End Role="ClientConsultant" EntitySet="ClientConsultant" />
+            <End Role="Timesheet" EntitySet="Timesheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimesheetDay_Timesheet" Association="Self.FK_TimesheetDay_Timesheet">
+            <End Role="Timesheet" EntitySet="Timesheet" />
+            <End Role="TimesheetDay" EntitySet="TimesheetDay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorClient_User" Association="Self.FK_VendorClient_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="VendorClient" EntitySet="VendorClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorClient_User1" Association="Self.FK_VendorClient_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="VendorClient" EntitySet="VendorClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorConsultant_User" Association="Self.FK_VendorConsultant_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="VendorConsultant" EntitySet="VendorConsultant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorConsultant_User1" Association="Self.FK_VendorConsultant_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="VendorConsultant" EntitySet="VendorConsultant" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="timesheetsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="timesheetsEntities" annotation:LazyLoadingEnabled="false" >
+          <EntitySet Name="User" EntityType="timesheetsModel.User" />
+          <EntitySet Name="SecurityToken" EntityType="timesheetsModel.SecurityToken" />
+          <AssociationSet Name="FK_SecurityToken_User" Association="timesheetsModel.FK_SecurityToken_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="SecurityToken" EntitySet="SecurityToken" />
+          </AssociationSet>
+          <EntitySet Name="ClientConsultant" EntityType="timesheetsModel.ClientConsultant" />
+          <AssociationSet Name="FK_ClientConsultant_User" Association="timesheetsModel.FK_ClientConsultant_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ClientConsultant" EntitySet="ClientConsultant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientConsultant_User1" Association="timesheetsModel.FK_ClientConsultant_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="ClientConsultant" EntitySet="ClientConsultant" />
+          </AssociationSet>
+          <EntitySet Name="Timesheet" EntityType="timesheetsModel.Timesheet" />
+          <EntitySet Name="TimesheetDay" EntityType="timesheetsModel.TimesheetDay" />
+          <AssociationSet Name="FK_Timesheet_ClientConsultant" Association="timesheetsModel.FK_Timesheet_ClientConsultant">
+            <End Role="ClientConsultant" EntitySet="ClientConsultant" />
+            <End Role="Timesheet" EntitySet="Timesheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimesheetDay_Timesheet" Association="timesheetsModel.FK_TimesheetDay_Timesheet">
+            <End Role="Timesheet" EntitySet="Timesheet" />
+            <End Role="TimesheetDay" EntitySet="TimesheetDay" />
+          </AssociationSet>
+          <EntitySet Name="VendorConsultant" EntityType="timesheetsModel.VendorConsultant" />
+          <AssociationSet Name="FK_ClientConsultant_VendorConsultant" Association="timesheetsModel.FK_ClientConsultant_VendorConsultant">
+            <End Role="VendorConsultant" EntitySet="VendorConsultant" />
+            <End Role="ClientConsultant" EntitySet="ClientConsultant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorConsultant_User2" Association="timesheetsModel.FK_VendorConsultant_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="VendorConsultant" EntitySet="VendorConsultant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorConsultant_User3" Association="timesheetsModel.FK_VendorConsultant_User3">
+            <End Role="User" EntitySet="User" />
+            <End Role="VendorConsultant" EntitySet="VendorConsultant" />
+          </AssociationSet>
+          <EntitySet Name="VendorClient" EntityType="timesheetsModel.VendorClient" />
+          <AssociationSet Name="FK_ClientConsultant_VendorClient" Association="timesheetsModel.FK_ClientConsultant_VendorClient">
+            <End Role="VendorClient" EntitySet="VendorClient" />
+            <End Role="ClientConsultant" EntitySet="ClientConsultant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorClient_User2" Association="timesheetsModel.FK_VendorClient_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="VendorClient" EntitySet="VendorClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorClient_User3" Association="timesheetsModel.FK_VendorClient_User3">
+            <End Role="User" EntitySet="User" />
+            <End Role="VendorClient" EntitySet="VendorClient" />
+          </AssociationSet>
+          <EntitySet Name="vwClientConsultant" EntityType="timesheetsModel.vwClientConsultant" />
+          <EntitySet Name="vwClientByConsultant" EntityType="timesheetsModel.vwClientByConsultant" />
+          <EntitySet Name="vwVendorConsultant" EntityType="timesheetsModel.vwVendorConsultant" />
+          <EntitySet Name="vwVendorClient" EntityType="timesheetsModel.vwVendorClient" />
+          <EntitySet Name="vwTimesheetClient" EntityType="timesheetsModel.vwTimesheetClient" />
+          <EntitySet Name="vwTimesheetConsultant" EntityType="timesheetsModel.vwTimesheetConsultant" />
+          <EntitySet Name="vwTimesheetVendor" EntityType="timesheetsModel.vwTimesheetVendor" />
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedDTS" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="UpdatedDTS" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SecurityToken" Relationship="timesheetsModel.FK_SecurityToken_User" FromRole="User" ToRole="SecurityToken" />
+          <NavigationProperty Name="ClientConsultant" Relationship="timesheetsModel.FK_ClientConsultant_User" FromRole="User" ToRole="ClientConsultant" />
+          <NavigationProperty Name="ClientConsultant1" Relationship="timesheetsModel.FK_ClientConsultant_User1" FromRole="User" ToRole="ClientConsultant" />
+          <NavigationProperty Name="VendorConsultant" Relationship="timesheetsModel.FK_VendorConsultant_User2" FromRole="User" ToRole="VendorConsultant" />
+          <NavigationProperty Name="VendorConsultant1" Relationship="timesheetsModel.FK_VendorConsultant_User3" FromRole="User" ToRole="VendorConsultant" />
+          <NavigationProperty Name="VendorClient" Relationship="timesheetsModel.FK_VendorClient_User2" FromRole="User" ToRole="VendorClient" />
+          <NavigationProperty Name="VendorClient1" Relationship="timesheetsModel.FK_VendorClient_User3" FromRole="User" ToRole="VendorClient" />
+        </EntityType>
+        <EntityType Name="SecurityToken">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="timesheetsModel.FK_SecurityToken_User" FromRole="SecurityToken" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_SecurityToken_User">
+          <End Type="timesheetsModel.User" Role="User" Multiplicity="1" />
+          <End Type="timesheetsModel.SecurityToken" Role="SecurityToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SecurityToken">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClientConsultant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorClientId" Type="Int32" Nullable="false" />
+          <Property Name="VendorConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="User" Relationship="timesheetsModel.FK_ClientConsultant_User" FromRole="ClientConsultant" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="timesheetsModel.FK_ClientConsultant_User1" FromRole="ClientConsultant" ToRole="User" />
+          <NavigationProperty Name="Timesheet" Relationship="timesheetsModel.FK_Timesheet_ClientConsultant" FromRole="ClientConsultant" ToRole="Timesheet" />
+          <NavigationProperty Name="VendorConsultant" Relationship="timesheetsModel.FK_ClientConsultant_VendorConsultant" FromRole="ClientConsultant" ToRole="VendorConsultant" />
+          <NavigationProperty Name="VendorClient" Relationship="timesheetsModel.FK_ClientConsultant_VendorClient" FromRole="ClientConsultant" ToRole="VendorClient" />
+        </EntityType>
+        <Association Name="FK_ClientConsultant_User">
+          <End Type="timesheetsModel.User" Role="User" Multiplicity="1" />
+          <End Type="timesheetsModel.ClientConsultant" Role="ClientConsultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ClientConsultant">
+              <PropertyRef Name="VendorClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientConsultant_User1">
+          <End Type="timesheetsModel.User" Role="User" Multiplicity="1" />
+          <End Type="timesheetsModel.ClientConsultant" Role="ClientConsultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ClientConsultant">
+              <PropertyRef Name="VendorConsultantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetAllVendorClientsById_Result">
+          <Property Type="Int32" Name="VendorClientId" Nullable="false" />
+          <Property Type="Int32" Name="VendorId" Nullable="false" />
+          <Property Type="Int32" Name="ClientId" Nullable="false" />
+          <Property Type="DateTime" Name="VendorClientCreatedDTS" Nullable="false" />
+          <Property Type="DateTime" Name="VendorClientUpdatedDTS" Nullable="false" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDTS" Nullable="false" />
+          <Property Type="DateTime" Name="UpdatedDTS" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Fax" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Url" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TaxCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Logo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetAllVendorConsultantsById_Result">
+          <Property Type="Int32" Name="VendorConsultantId" Nullable="false" />
+          <Property Type="Int32" Name="VendorId" Nullable="false" />
+          <Property Type="Int32" Name="ConsultantId" Nullable="false" />
+          <Property Type="DateTime" Name="VendorConsultantCreatedDTS" Nullable="false" />
+          <Property Type="DateTime" Name="VendorConsultantUpdatedDTS" Nullable="false" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDTS" Nullable="false" />
+          <Property Type="DateTime" Name="UpdatedDTS" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Fax" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Url" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TaxCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Logo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <EntityType Name="Timesheet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ClientConsultant" Relationship="timesheetsModel.FK_Timesheet_ClientConsultant" FromRole="Timesheet" ToRole="ClientConsultant" />
+          <NavigationProperty Name="TimesheetDay" Relationship="timesheetsModel.FK_TimesheetDay_Timesheet" FromRole="Timesheet" ToRole="TimesheetDay" />
+        </EntityType>
+        <EntityType Name="TimesheetDay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimesheetId" Type="Int32" Nullable="false" />
+          <Property Name="Day" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Worked" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Timesheet" Relationship="timesheetsModel.FK_TimesheetDay_Timesheet" FromRole="TimesheetDay" ToRole="Timesheet" />
+        </EntityType>
+        <Association Name="FK_Timesheet_ClientConsultant">
+          <End Type="timesheetsModel.ClientConsultant" Role="ClientConsultant" Multiplicity="1" />
+          <End Type="timesheetsModel.Timesheet" Role="Timesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientConsultant">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Timesheet">
+              <PropertyRef Name="ClientConsultantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimesheetDay_Timesheet">
+          <End Type="timesheetsModel.Timesheet" Role="Timesheet" Multiplicity="1" />
+          <End Type="timesheetsModel.TimesheetDay" Role="TimesheetDay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timesheet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimesheetDay">
+              <PropertyRef Name="TimesheetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VendorConsultant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ClientConsultant" Relationship="timesheetsModel.FK_ClientConsultant_VendorConsultant" FromRole="VendorConsultant" ToRole="ClientConsultant" />
+          <NavigationProperty Name="User" Relationship="timesheetsModel.FK_VendorConsultant_User2" FromRole="VendorConsultant" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="timesheetsModel.FK_VendorConsultant_User3" FromRole="VendorConsultant" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_ClientConsultant_VendorConsultant">
+          <End Type="timesheetsModel.VendorConsultant" Role="VendorConsultant" Multiplicity="1" />
+          <End Type="timesheetsModel.ClientConsultant" Role="ClientConsultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VendorConsultant">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ClientConsultant">
+              <PropertyRef Name="VendorConsultantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorConsultant_User2">
+          <End Type="timesheetsModel.User" Role="User" Multiplicity="1" />
+          <End Type="timesheetsModel.VendorConsultant" Role="VendorConsultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VendorConsultant">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorConsultant_User3">
+          <End Type="timesheetsModel.User" Role="User" Multiplicity="1" />
+          <End Type="timesheetsModel.VendorConsultant" Role="VendorConsultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VendorConsultant">
+              <PropertyRef Name="ConsultantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VendorClient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ClientConsultant" Relationship="timesheetsModel.FK_ClientConsultant_VendorClient" FromRole="VendorClient" ToRole="ClientConsultant" />
+          <NavigationProperty Name="User" Relationship="timesheetsModel.FK_VendorClient_User2" FromRole="VendorClient" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="timesheetsModel.FK_VendorClient_User3" FromRole="VendorClient" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_ClientConsultant_VendorClient">
+          <End Type="timesheetsModel.VendorClient" Role="VendorClient" Multiplicity="1" />
+          <End Type="timesheetsModel.ClientConsultant" Role="ClientConsultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VendorClient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ClientConsultant">
+              <PropertyRef Name="VendorClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorClient_User2">
+          <End Type="timesheetsModel.User" Role="User" Multiplicity="1" />
+          <End Type="timesheetsModel.VendorClient" Role="VendorClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VendorClient">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorClient_User3">
+          <End Type="timesheetsModel.User" Role="User" Multiplicity="1" />
+          <End Type="timesheetsModel.VendorClient" Role="VendorClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VendorClient">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwClientConsultant">
+          <Key>
+            <PropertyRef Name="ClientConsultantId" />
+            <PropertyRef Name="ClientConsultantCreatedDTS" />
+            <PropertyRef Name="ClientConsultantUpdatedDTS" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ClientCreatedDTS" />
+            <PropertyRef Name="ClientUpdatedDTS" />
+            <PropertyRef Name="ClientEmail" />
+            <PropertyRef Name="ClientType" />
+            <PropertyRef Name="ClientUserName" />
+            <PropertyRef Name="ConsultantId" />
+            <PropertyRef Name="ConsultantCreatedDTS" />
+            <PropertyRef Name="ConsultantUpdatedDTS" />
+            <PropertyRef Name="ConsultantEmail" />
+            <PropertyRef Name="ConsultantType" />
+            <PropertyRef Name="ConsultantUserName" />
+            <PropertyRef Name="ClientVendorId" />
+            <PropertyRef Name="ConsultantVendorId" />
+          </Key>
+          <Property Name="ClientConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="ClientConsultantCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientConsultantUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ClientCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClientPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientType" Type="Int32" Nullable="false" />
+          <Property Name="ClientUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClientPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientFax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientTaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientContact" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ConsultantUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ConsultantEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantType" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantFax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantTaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantContact" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientVendorId" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantVendorId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwClientByConsultant">
+          <Key>
+            <PropertyRef Name="ClientConsultantId" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="ConsultantId" />
+          </Key>
+          <Property Name="ClientConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwVendorConsultant">
+          <Key>
+            <PropertyRef Name="VendorConsultantId" />
+            <PropertyRef Name="VendorId" />
+            <PropertyRef Name="ConsultantId" />
+            <PropertyRef Name="VendorConsultantCreatedDTS" />
+            <PropertyRef Name="VendorConsultantUpdatedDTS" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="VendorConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="VendorConsultantCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VendorConsultantUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwVendorClient">
+          <Key>
+            <PropertyRef Name="VendorClientId" />
+            <PropertyRef Name="VendorId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="VendorClientCreatedDTS" />
+            <PropertyRef Name="VendorClientUpdatedDTS" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="VendorClientId" Type="Int32" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="VendorClientCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VendorClientUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwTimesheetClient">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ClientConsultantId" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="EndDate" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="VendorId" />
+            <PropertyRef Name="VendorCreatedDTS" />
+            <PropertyRef Name="VendorUpdatedDTS" />
+            <PropertyRef Name="VendorEmail" />
+            <PropertyRef Name="VendorType" />
+            <PropertyRef Name="VendorUserName" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ClientCreatedDTS" />
+            <PropertyRef Name="ClientUpdatedDTS" />
+            <PropertyRef Name="ClientEmail" />
+            <PropertyRef Name="ClientType" />
+            <PropertyRef Name="ClientUserName" />
+            <PropertyRef Name="ConsultantId" />
+            <PropertyRef Name="ConsultantCreatedDTS" />
+            <PropertyRef Name="ConsultantUpdatedDTS" />
+            <PropertyRef Name="ConsultantEmail" />
+            <PropertyRef Name="ConsultantType" />
+            <PropertyRef Name="ConsultantUserName" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="ClientConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Worked" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="VendorCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VendorUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VendorEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VendorPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorType" Type="Int32" Nullable="false" />
+          <Property Name="VendorUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VendorPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorFax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorTaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ClientCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClientPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientType" Type="Int32" Nullable="false" />
+          <Property Name="ClientUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClientPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientFax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientTaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ConsultantUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ConsultantEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantType" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantFax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantTaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwTimesheetConsultant">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ClientConsultantId" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="EndDate" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="VendorId" />
+            <PropertyRef Name="VendorCreatedDTS" />
+            <PropertyRef Name="VendorUpdatedDTS" />
+            <PropertyRef Name="VendorEmail" />
+            <PropertyRef Name="VendorType" />
+            <PropertyRef Name="VendorUserName" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ClientCreatedDTS" />
+            <PropertyRef Name="ClientUpdatedDTS" />
+            <PropertyRef Name="ClientEmail" />
+            <PropertyRef Name="ClientType" />
+            <PropertyRef Name="ClientUserName" />
+            <PropertyRef Name="ConsultantId" />
+            <PropertyRef Name="ConsultantCreatedDTS" />
+            <PropertyRef Name="ConsultantUpdatedDTS" />
+            <PropertyRef Name="ConsultantEmail" />
+            <PropertyRef Name="ConsultantType" />
+            <PropertyRef Name="ConsultantUserName" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="ClientConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Worked" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="VendorCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VendorUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VendorEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VendorPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorType" Type="Int32" Nullable="false" />
+          <Property Name="VendorUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VendorPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorFax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorTaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ClientCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClientPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientType" Type="Int32" Nullable="false" />
+          <Property Name="ClientUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClientPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientFax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientTaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ConsultantUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ConsultantEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantType" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantFax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantTaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwTimesheetVendor">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ClientConsultantId" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="EndDate" />
+            <PropertyRef Name="CreatedDTS" />
+            <PropertyRef Name="UpdatedDTS" />
+            <PropertyRef Name="VendorId" />
+            <PropertyRef Name="VendorCreatedDTS" />
+            <PropertyRef Name="VendorUpdatedDTS" />
+            <PropertyRef Name="VendorEmail" />
+            <PropertyRef Name="VendorType" />
+            <PropertyRef Name="VendorUserName" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ClientCreatedDTS" />
+            <PropertyRef Name="ClientUpdatedDTS" />
+            <PropertyRef Name="ClientEmail" />
+            <PropertyRef Name="ClientType" />
+            <PropertyRef Name="ClientUserName" />
+            <PropertyRef Name="ConsultantId" />
+            <PropertyRef Name="ConsultantCreatedDTS" />
+            <PropertyRef Name="ConsultantUpdatedDTS" />
+            <PropertyRef Name="ConsultantEmail" />
+            <PropertyRef Name="ConsultantType" />
+            <PropertyRef Name="ConsultantUserName" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="ClientConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Worked" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="VendorCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VendorUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VendorEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VendorPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorType" Type="Int32" Nullable="false" />
+          <Property Name="VendorUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VendorPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorFax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorTaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VendorLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ClientCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClientPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientType" Type="Int32" Nullable="false" />
+          <Property Name="ClientUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClientPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientFax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientTaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantCreatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ConsultantUpdatedDTS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ConsultantEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantType" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantFax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantTaxCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConsultantContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="timesheetsModelStoreContainer" CdmEntityContainer="timesheetsEntities" >
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="timesheetsModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityToken">
+            <EntityTypeMapping TypeName="timesheetsModel.SecurityToken">
+              <MappingFragment StoreEntitySet="SecurityToken">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientConsultant">
+            <EntityTypeMapping TypeName="timesheetsModel.ClientConsultant">
+              <MappingFragment StoreEntitySet="ClientConsultant">
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="VendorConsultantId" ColumnName="VendorConsultantId" />
+                <ScalarProperty Name="VendorClientId" ColumnName="VendorClientId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Timesheet">
+            <EntityTypeMapping TypeName="timesheetsModel.Timesheet">
+              <MappingFragment StoreEntitySet="Timesheet">
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ClientConsultantId" ColumnName="ClientConsultantId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimesheetDay">
+            <EntityTypeMapping TypeName="timesheetsModel.TimesheetDay">
+              <MappingFragment StoreEntitySet="TimesheetDay">
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="Worked" ColumnName="Worked" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="TimesheetId" ColumnName="TimesheetId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorConsultant">
+            <EntityTypeMapping TypeName="timesheetsModel.VendorConsultant">
+              <MappingFragment StoreEntitySet="VendorConsultant">
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorClient">
+            <EntityTypeMapping TypeName="timesheetsModel.VendorClient">
+              <MappingFragment StoreEntitySet="VendorClient">
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwClientConsultant">
+            <EntityTypeMapping TypeName="timesheetsModel.vwClientConsultant">
+              <MappingFragment StoreEntitySet="vwClientConsultant">
+                <ScalarProperty Name="ConsultantVendorId" ColumnName="ConsultantVendorId" />
+                <ScalarProperty Name="ClientVendorId" ColumnName="ClientVendorId" />
+                <ScalarProperty Name="ConsultantContact" ColumnName="ConsultantContact" />
+                <ScalarProperty Name="ConsultantLogo" ColumnName="ConsultantLogo" />
+                <ScalarProperty Name="ConsultantTaxCode" ColumnName="ConsultantTaxCode" />
+                <ScalarProperty Name="ConsultantUrl" ColumnName="ConsultantUrl" />
+                <ScalarProperty Name="ConsultantFax" ColumnName="ConsultantFax" />
+                <ScalarProperty Name="ConsultantPhone" ColumnName="ConsultantPhone" />
+                <ScalarProperty Name="ConsultantAddress" ColumnName="ConsultantAddress" />
+                <ScalarProperty Name="ConsultantUserName" ColumnName="ConsultantUserName" />
+                <ScalarProperty Name="ConsultantType" ColumnName="ConsultantType" />
+                <ScalarProperty Name="ConsultantPassword" ColumnName="ConsultantPassword" />
+                <ScalarProperty Name="ConsultantEmail" ColumnName="ConsultantEmail" />
+                <ScalarProperty Name="ConsultantUpdatedDTS" ColumnName="ConsultantUpdatedDTS" />
+                <ScalarProperty Name="ConsultantCreatedDTS" ColumnName="ConsultantCreatedDTS" />
+                <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
+                <ScalarProperty Name="ClientContact" ColumnName="ClientContact" />
+                <ScalarProperty Name="ClientLogo" ColumnName="ClientLogo" />
+                <ScalarProperty Name="ClientTaxCode" ColumnName="ClientTaxCode" />
+                <ScalarProperty Name="ClientUrl" ColumnName="ClientUrl" />
+                <ScalarProperty Name="ClientFax" ColumnName="ClientFax" />
+                <ScalarProperty Name="ClientPhone" ColumnName="ClientPhone" />
+                <ScalarProperty Name="ClientAddress" ColumnName="ClientAddress" />
+                <ScalarProperty Name="ClientUserName" ColumnName="ClientUserName" />
+                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
+                <ScalarProperty Name="ClientPassword" ColumnName="ClientPassword" />
+                <ScalarProperty Name="ClientEmail" ColumnName="ClientEmail" />
+                <ScalarProperty Name="ClientUpdatedDTS" ColumnName="ClientUpdatedDTS" />
+                <ScalarProperty Name="ClientCreatedDTS" ColumnName="ClientCreatedDTS" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ClientConsultantUpdatedDTS" ColumnName="ClientConsultantUpdatedDTS" />
+                <ScalarProperty Name="ClientConsultantCreatedDTS" ColumnName="ClientConsultantCreatedDTS" />
+                <ScalarProperty Name="ClientConsultantId" ColumnName="ClientConsultantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwClientByConsultant">
+            <EntityTypeMapping TypeName="timesheetsModel.vwClientByConsultant">
+              <MappingFragment StoreEntitySet="vwClientByConsultant">
+                <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ClientConsultantId" ColumnName="ClientConsultantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwVendorConsultant">
+            <EntityTypeMapping TypeName="timesheetsModel.vwVendorConsultant">
+              <MappingFragment StoreEntitySet="vwVendorConsultant">
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="VendorConsultantUpdatedDTS" ColumnName="VendorConsultantUpdatedDTS" />
+                <ScalarProperty Name="VendorConsultantCreatedDTS" ColumnName="VendorConsultantCreatedDTS" />
+                <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="VendorConsultantId" ColumnName="VendorConsultantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwVendorClient">
+            <EntityTypeMapping TypeName="timesheetsModel.vwVendorClient">
+              <MappingFragment StoreEntitySet="vwVendorClient">
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="VendorClientUpdatedDTS" ColumnName="VendorClientUpdatedDTS" />
+                <ScalarProperty Name="VendorClientCreatedDTS" ColumnName="VendorClientCreatedDTS" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="VendorClientId" ColumnName="VendorClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwTimesheetClient">
+            <EntityTypeMapping TypeName="timesheetsModel.vwTimesheetClient">
+              <MappingFragment StoreEntitySet="vwTimesheetClient">
+                <ScalarProperty Name="ConsultantContact" ColumnName="ConsultantContact" />
+                <ScalarProperty Name="ConsultantLogo" ColumnName="ConsultantLogo" />
+                <ScalarProperty Name="ConsultantTaxCode" ColumnName="ConsultantTaxCode" />
+                <ScalarProperty Name="ConsultantUrl" ColumnName="ConsultantUrl" />
+                <ScalarProperty Name="ConsultantFax" ColumnName="ConsultantFax" />
+                <ScalarProperty Name="ConsultantPhone" ColumnName="ConsultantPhone" />
+                <ScalarProperty Name="ConsultantAddress" ColumnName="ConsultantAddress" />
+                <ScalarProperty Name="ConsultantUserName" ColumnName="ConsultantUserName" />
+                <ScalarProperty Name="ConsultantType" ColumnName="ConsultantType" />
+                <ScalarProperty Name="ConsultantPassword" ColumnName="ConsultantPassword" />
+                <ScalarProperty Name="ConsultantEmail" ColumnName="ConsultantEmail" />
+                <ScalarProperty Name="ConsultantUpdatedDTS" ColumnName="ConsultantUpdatedDTS" />
+                <ScalarProperty Name="ConsultantCreatedDTS" ColumnName="ConsultantCreatedDTS" />
+                <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
+                <ScalarProperty Name="ClientContact" ColumnName="ClientContact" />
+                <ScalarProperty Name="ClientLogo" ColumnName="ClientLogo" />
+                <ScalarProperty Name="ClientTaxCode" ColumnName="ClientTaxCode" />
+                <ScalarProperty Name="ClientUrl" ColumnName="ClientUrl" />
+                <ScalarProperty Name="ClientFax" ColumnName="ClientFax" />
+                <ScalarProperty Name="ClientPhone" ColumnName="ClientPhone" />
+                <ScalarProperty Name="ClientAddress" ColumnName="ClientAddress" />
+                <ScalarProperty Name="ClientUserName" ColumnName="ClientUserName" />
+                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
+                <ScalarProperty Name="ClientPassword" ColumnName="ClientPassword" />
+                <ScalarProperty Name="ClientEmail" ColumnName="ClientEmail" />
+                <ScalarProperty Name="ClientUpdatedDTS" ColumnName="ClientUpdatedDTS" />
+                <ScalarProperty Name="ClientCreatedDTS" ColumnName="ClientCreatedDTS" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
+                <ScalarProperty Name="VendorLogo" ColumnName="VendorLogo" />
+                <ScalarProperty Name="VendorTaxCode" ColumnName="VendorTaxCode" />
+                <ScalarProperty Name="VendorUrl" ColumnName="VendorUrl" />
+                <ScalarProperty Name="VendorFax" ColumnName="VendorFax" />
+                <ScalarProperty Name="VendorPhone" ColumnName="VendorPhone" />
+                <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
+                <ScalarProperty Name="VendorUserName" ColumnName="VendorUserName" />
+                <ScalarProperty Name="VendorType" ColumnName="VendorType" />
+                <ScalarProperty Name="VendorPassword" ColumnName="VendorPassword" />
+                <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
+                <ScalarProperty Name="VendorUpdatedDTS" ColumnName="VendorUpdatedDTS" />
+                <ScalarProperty Name="VendorCreatedDTS" ColumnName="VendorCreatedDTS" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Worked" ColumnName="Worked" />
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ClientConsultantId" ColumnName="ClientConsultantId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwTimesheetConsultant">
+            <EntityTypeMapping TypeName="timesheetsModel.vwTimesheetConsultant">
+              <MappingFragment StoreEntitySet="vwTimesheetConsultant">
+                <ScalarProperty Name="ConsultantContact" ColumnName="ConsultantContact" />
+                <ScalarProperty Name="ConsultantLogo" ColumnName="ConsultantLogo" />
+                <ScalarProperty Name="ConsultantTaxCode" ColumnName="ConsultantTaxCode" />
+                <ScalarProperty Name="ConsultantUrl" ColumnName="ConsultantUrl" />
+                <ScalarProperty Name="ConsultantFax" ColumnName="ConsultantFax" />
+                <ScalarProperty Name="ConsultantPhone" ColumnName="ConsultantPhone" />
+                <ScalarProperty Name="ConsultantAddress" ColumnName="ConsultantAddress" />
+                <ScalarProperty Name="ConsultantUserName" ColumnName="ConsultantUserName" />
+                <ScalarProperty Name="ConsultantType" ColumnName="ConsultantType" />
+                <ScalarProperty Name="ConsultantPassword" ColumnName="ConsultantPassword" />
+                <ScalarProperty Name="ConsultantEmail" ColumnName="ConsultantEmail" />
+                <ScalarProperty Name="ConsultantUpdatedDTS" ColumnName="ConsultantUpdatedDTS" />
+                <ScalarProperty Name="ConsultantCreatedDTS" ColumnName="ConsultantCreatedDTS" />
+                <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
+                <ScalarProperty Name="ClientContact" ColumnName="ClientContact" />
+                <ScalarProperty Name="ClientLogo" ColumnName="ClientLogo" />
+                <ScalarProperty Name="ClientTaxCode" ColumnName="ClientTaxCode" />
+                <ScalarProperty Name="ClientUrl" ColumnName="ClientUrl" />
+                <ScalarProperty Name="ClientFax" ColumnName="ClientFax" />
+                <ScalarProperty Name="ClientPhone" ColumnName="ClientPhone" />
+                <ScalarProperty Name="ClientAddress" ColumnName="ClientAddress" />
+                <ScalarProperty Name="ClientUserName" ColumnName="ClientUserName" />
+                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
+                <ScalarProperty Name="ClientPassword" ColumnName="ClientPassword" />
+                <ScalarProperty Name="ClientEmail" ColumnName="ClientEmail" />
+                <ScalarProperty Name="ClientUpdatedDTS" ColumnName="ClientUpdatedDTS" />
+                <ScalarProperty Name="ClientCreatedDTS" ColumnName="ClientCreatedDTS" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
+                <ScalarProperty Name="VendorLogo" ColumnName="VendorLogo" />
+                <ScalarProperty Name="VendorTaxCode" ColumnName="VendorTaxCode" />
+                <ScalarProperty Name="VendorUrl" ColumnName="VendorUrl" />
+                <ScalarProperty Name="VendorFax" ColumnName="VendorFax" />
+                <ScalarProperty Name="VendorPhone" ColumnName="VendorPhone" />
+                <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
+                <ScalarProperty Name="VendorUserName" ColumnName="VendorUserName" />
+                <ScalarProperty Name="VendorType" ColumnName="VendorType" />
+                <ScalarProperty Name="VendorPassword" ColumnName="VendorPassword" />
+                <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
+                <ScalarProperty Name="VendorUpdatedDTS" ColumnName="VendorUpdatedDTS" />
+                <ScalarProperty Name="VendorCreatedDTS" ColumnName="VendorCreatedDTS" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Worked" ColumnName="Worked" />
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ClientConsultantId" ColumnName="ClientConsultantId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwTimesheetVendor">
+            <EntityTypeMapping TypeName="timesheetsModel.vwTimesheetVendor">
+              <MappingFragment StoreEntitySet="vwTimesheetVendor">
+                <ScalarProperty Name="ConsultantContact" ColumnName="ConsultantContact" />
+                <ScalarProperty Name="ConsultantLogo" ColumnName="ConsultantLogo" />
+                <ScalarProperty Name="ConsultantTaxCode" ColumnName="ConsultantTaxCode" />
+                <ScalarProperty Name="ConsultantUrl" ColumnName="ConsultantUrl" />
+                <ScalarProperty Name="ConsultantFax" ColumnName="ConsultantFax" />
+                <ScalarProperty Name="ConsultantPhone" ColumnName="ConsultantPhone" />
+                <ScalarProperty Name="ConsultantAddress" ColumnName="ConsultantAddress" />
+                <ScalarProperty Name="ConsultantUserName" ColumnName="ConsultantUserName" />
+                <ScalarProperty Name="ConsultantType" ColumnName="ConsultantType" />
+                <ScalarProperty Name="ConsultantPassword" ColumnName="ConsultantPassword" />
+                <ScalarProperty Name="ConsultantEmail" ColumnName="ConsultantEmail" />
+                <ScalarProperty Name="ConsultantUpdatedDTS" ColumnName="ConsultantUpdatedDTS" />
+                <ScalarProperty Name="ConsultantCreatedDTS" ColumnName="ConsultantCreatedDTS" />
+                <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
+                <ScalarProperty Name="ClientContact" ColumnName="ClientContact" />
+                <ScalarProperty Name="ClientLogo" ColumnName="ClientLogo" />
+                <ScalarProperty Name="ClientTaxCode" ColumnName="ClientTaxCode" />
+                <ScalarProperty Name="ClientUrl" ColumnName="ClientUrl" />
+                <ScalarProperty Name="ClientFax" ColumnName="ClientFax" />
+                <ScalarProperty Name="ClientPhone" ColumnName="ClientPhone" />
+                <ScalarProperty Name="ClientAddress" ColumnName="ClientAddress" />
+                <ScalarProperty Name="ClientUserName" ColumnName="ClientUserName" />
+                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
+                <ScalarProperty Name="ClientPassword" ColumnName="ClientPassword" />
+                <ScalarProperty Name="ClientEmail" ColumnName="ClientEmail" />
+                <ScalarProperty Name="ClientUpdatedDTS" ColumnName="ClientUpdatedDTS" />
+                <ScalarProperty Name="ClientCreatedDTS" ColumnName="ClientCreatedDTS" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
+                <ScalarProperty Name="VendorLogo" ColumnName="VendorLogo" />
+                <ScalarProperty Name="VendorTaxCode" ColumnName="VendorTaxCode" />
+                <ScalarProperty Name="VendorUrl" ColumnName="VendorUrl" />
+                <ScalarProperty Name="VendorFax" ColumnName="VendorFax" />
+                <ScalarProperty Name="VendorPhone" ColumnName="VendorPhone" />
+                <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
+                <ScalarProperty Name="VendorUserName" ColumnName="VendorUserName" />
+                <ScalarProperty Name="VendorType" ColumnName="VendorType" />
+                <ScalarProperty Name="VendorPassword" ColumnName="VendorPassword" />
+                <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
+                <ScalarProperty Name="VendorUpdatedDTS" ColumnName="VendorUpdatedDTS" />
+                <ScalarProperty Name="VendorCreatedDTS" ColumnName="VendorCreatedDTS" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Worked" ColumnName="Worked" />
+                <ScalarProperty Name="UpdatedDTS" ColumnName="UpdatedDTS" />
+                <ScalarProperty Name="CreatedDTS" ColumnName="CreatedDTS" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ClientConsultantId" ColumnName="ClientConsultantId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

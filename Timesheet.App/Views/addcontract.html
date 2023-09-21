@@ -1,0 +1,68 @@
+﻿<style>
+    .hovered:hover {
+        background-color: silver;
+        cursor: pointer;
+    }
+    .selected {
+        background-color: #5bc0de;
+    }
+</style>
+
+<div class="bounceInUp animated">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-ok-sign"></span> <a href="#">Home</a> / <a href="#contracts"> My Contracts</a> / Add New
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-danger hidden text-center" id="contractAlert">{{contractAlertMessage}}</div>
+            <div class="well well-sm text-center">
+                Please associate one of your clients on the left with one of your consultants on the right.
+            </div>
+
+            <div style="overflow-y: auto; padding-top:15px; padding-left:15px; padding-right:15px; height: 600px" class="col-sm-6">
+
+                <div class="row client hovered" ng-repeat="client in clients | filter:searchText" style="padding-top: 15px; padding-left: 15px" ng-click="selectClient($event, client.id)">
+                    <address>
+                        <div>
+                            <span class="glyphicon glyphicon-usd"></span><strong> {{client.Client.UserName}}</strong><br />
+                            {{client.Client.Contact}}<br />
+                            <a href="mailto:{{client.Client.Email}}">{{client.Client.Email}}</a><br />
+                            {{client.Client.Phone}}<br />
+                        </div>
+                        <div class="clearfix" />
+                        <hr />
+                    </address>
+                </div>
+
+            </div>
+
+            <div style="overflow-y: auto; padding-top:15px; padding-left:15px; padding-right:15px; height: 600px" class="col-sm-6">
+
+                <div class="row consultant hovered" ng-repeat="consultant in consultants | filter:searchText" style="padding-top: 15px; padding-left: 15px" ng-click="selectConsultant($event, consultant.id)">
+                    <address>
+                        <div>
+                            <span class="glyphicon glyphicon-copyright-mark"></span><strong> {{consultant.Consultant.UserName}}</strong><br />
+                            {{consultant.Consultant.Contact}}<br />
+                            <a href="mailto:{{consultant.Consultant.Email}}">{{consultant.Consultant.Email}}</a><br />
+                            {{consultant.Consultant.Phone}}<br />
+                        </div>
+                        <div class="clearfix" />
+                        <hr />
+                    </address>
+                </div>
+
+            </div>
+            <div class="clearfix" />
+
+            <form role="form" name="contractForm">
+                <input type="text" ng-model="clientId" id="clientId" class="form-control hidden" required />
+                <input type="text" ng-model="consultantId" id="consultantId" class="form-control hidden" required />
+
+                <div class="btn-group col-xs-12">
+                    <button type="button" class="col-xs-6 btn btn-primary" ng-disabled="contractForm.$invalid" ng-click="addcontract()">Save</button>
+                    <button type="button" class="btn btn-default col-xs-6" ng-click="gohome()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

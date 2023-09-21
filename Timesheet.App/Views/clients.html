@@ -1,0 +1,45 @@
+﻿<style>
+    .hovered:hover {
+        background-color: silver;
+        cursor: default;
+    }
+</style>
+
+<div class="bounceInUp animated">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-usd"></span> <a href="#">Home</a> / My Clients 
+            <a href="#addclient" class="pull-right"><span class="glyphicon glyphicon-plus-sign"></span> Add New</a>
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-info hidden text-center" id="noClientsAlert">There are no clients in your profile. Please use the Add New button to add.</div>            
+            <input type="text" class="form-control" ng-model="searchText" placeholder="Search for client" value="{{searchText}}">
+            <div style="overflow-y: auto; padding-top:15px; padding-left:15px; padding-right:15px; height: 600px ">
+                <div class="row hovered" ng-repeat="client in clients | filter:searchText" style="padding-top:15px">
+                    <address>
+                        <div class="col-sm-5">
+                            <strong>{{client.Client.UserName}}</strong><br />
+                            {{client.Client.Contact}}<br />
+                            <a href="mailto:{{client.Client.Email}}">{{client.Client.Email}}</a><br />
+                            {{client.Client.Phone}}<br />
+                        </div>
+                        <div class="col-sm-5">
+                            {{client.Client.Address}}<br />
+                            <a href="{{client.Client.Url}}">{{client.Client.Url}}</a><br />
+                            {{client.Client.Fax}}<span ng-hide="client.Client.Fax == ''"> (fax)</span><br />
+                            <small>{{client.Client.CreatedDTS | date:'MM/dd/yyyy'}}</small>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="btn-group-vertical">
+                                <button type="button" class="btn btn-primary" ng-click="modify(client.Client.id)">Modify</button>
+                                <button type="button" class="btn btn-danger" ng-click="confirmdelete(client.Client.id)">Delete</button>
+                            </div>
+                        </div>
+                        <div class="clearfix" />
+                        <hr />
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

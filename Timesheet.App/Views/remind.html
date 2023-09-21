@@ -1,0 +1,22 @@
+﻿<div class="bounceInUp animated">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="glyphicon glyphicon-lock"></span> Remind My Password</div>
+        <div class="panel-body">
+            <div class="alert hidden text-center" id="remindAlert">{{remindAlertMessage}}</div>
+            <form name="remindForm" role="form" class="form-horizontal pull-left col-xs-12">
+                <div class="form-group">
+                    <label for="email" class="col-xs-4 control-label">Email</label>
+                    <div class="col-xs-8 col-md-6">
+                        <input type="email" id="email" name="email" ng-model="email" ng-trim="true" placeholder="Enter email" required class="form-control" />
+                    </div>
+                </div>
+
+                <br/>
+                <div class="btn-group col-xs-12">
+                    <button type="submit" class="btn btn-primary col-xs-6" ng-disabled="remindFormValid()" ng-click="remind()">Send</button>
+                    <button type="button" class="btn btn-default col-xs-6" ng-click="gologin()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5F8FAE64-A002-40AD-BB30-A895BB2DECC9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Timesheet.Library</RootNamespace>
+    <AssemblyName>Timesheet.Library</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constant.cs" />
+    <Compile Include="Model\Token.cs" />
+    <Compile Include="Model\VendorConsultant.cs" />
+    <Compile Include="Model\VendorClient.cs" />
+    <Compile Include="Model\ClientConsultant.cs" />
+    <Compile Include="Model\IModel.cs" />
+    <Compile Include="Model\Rate.cs" />
+    <Compile Include="Model\Timesheet.cs" />
+    <Compile Include="Model\TimesheetDay.cs" />
+    <Compile Include="Model\UpdatableModel.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Repository\Access\OleDbHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Access\ClientConsultantRepository.cs" />
+    <Compile Include="Repository\Access\TimesheetRepository.cs" />
+    <Compile Include="Repository\Access\UserRepository.cs" />
+    <Compile Include="Repository\Access\VendorConsultantRepository.cs" />
+    <Compile Include="Repository\Access\VendorClientRepository.cs" />
+    <Compile Include="Repository\Email\EmailRepository.cs" />
+    <Compile Include="Repository\IEmailRepository.cs" />
+    <Compile Include="Repository\IListRepository.cs" />
+    <Compile Include="Repository\IVendorConsultantRepository.cs" />
+    <Compile Include="Repository\IVendorClientRepository.cs" />
+    <Compile Include="Repository\IClientConsultantRepository.cs" />
+    <Compile Include="Repository\ITimesheetRepository.cs" />
+    <Compile Include="Repository\IRateRepository.cs" />
+    <Compile Include="Repository\IUserRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\Mssql\BaseRepository.cs" />
+    <Compile Include="Repository\Mssql\ClientConsultant.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\ClientConsultantRepository.cs" />
+    <Compile Include="Repository\Mssql\GetAllVendorClientsById_Result.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\GetAllVendorConsultantsById_Result.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\DbHelper.cs" />
+    <Compile Include="Repository\Mssql\SecurityToken.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\Timesheet.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\TimesheetDay.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\TimesheetRepository.cs" />
+    <Compile Include="Repository\Mssql\timesheets.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>timesheets.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\timesheets.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\timesheets.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>timesheets.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\User.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\UserRepository.cs" />
+    <Compile Include="Repository\Mssql\VendorClient.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\VendorClientRepository.cs" />
+    <Compile Include="Repository\Mssql\VendorConsultant.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\VendorConsultantRepository.cs" />
+    <Compile Include="Repository\Mssql\vwClientByConsultant.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\vwClientConsultant.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\vwTimesheetClient.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\vwTimesheetConsultant.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\vwTimesheetVendor.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\vwVendorClient.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Mssql\vwVendorConsultant.cs">
+      <DependentUpon>timesheets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Static.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="Repository\Mssql\timesheets.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>timesheets.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Repository\Mssql\timesheets.edmx.diagram">
+      <DependentUpon>timesheets.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Repository\Mssql\timesheets.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>timesheets.edmx</DependentUpon>
+      <LastGenOutput>timesheets.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Repository\Mssql\timesheets.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>timesheets.edmx</DependentUpon>
+      <LastGenOutput>timesheets.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,61 @@
+﻿<style>
+    .hovered:hover {
+        background-color: silver;
+        cursor: default;
+    }
+    .pending {
+        color: rgb(144, 148, 139) ;
+    }
+    .submitted {
+        color: rgb(89, 110, 44);
+    }
+    .approved {
+        color: green;
+    }
+    .rejected {
+        color: red;
+    }
+    .processed {
+        color: rgb(6, 11, 122);
+    }
+</style>
+
+<div class="bounceInUp animated">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-time"></span> <a href="#">Home</a> / My Timesheets 
+            <a href="#addtimesheet" class="pull-right" ng-if="user.type == 'Consultant'"><span class="glyphicon glyphicon-plus-sign"></span> Add New</a>
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-info hidden text-center" id="noTimesheetsAlert">There are no timesheets in your profile. <span ng-if="user.type == 'Consultant'">Please use the Add New button to add.</span></div>            
+            <input type="text" class="form-control" ng-model="searchText" placeholder="Search for timesheet" value="{{searchText}}">
+            <div style="overflow-y: auto; padding-top:15px; padding-left:15px; padding-right:15px; height: 600px ">
+                <div class="row hovered" ng-repeat="timesheet in timesheets | filter:searchText" style="padding-top:15px">
+                    <address>
+                        <div class="col-sm-5">
+                            Vendor:     <b>{{timesheet.Vendor.UserName}}</b><br />
+                            Client:     <b>{{timesheet.Client.UserName}}</b><br />
+                            Consultant: <b>{{timesheet.Consultant.UserName}}</b>
+                        </div>
+                        <div class="col-sm-5">
+                            {{timesheet.StartDate}} - {{timesheet.EndDate}}<br/>
+                            Worked: <b>{{timesheet.Worked}} hours</b><br />
+                            <span ng-class="getStatusClass(timesheet.TimesheetStatus)">{{timesheet.TimesheetStatus}}</span><br />                            
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="btn-group-vertical">
+                                <button type="button" class="btn btn-primary" ng-if="user.type == 'Client' || user.type == 'Vendor' || (user.type == 'Consultant' && (timesheet.TimesheetStatus == 'Approved' || timesheet.TimesheetStatus == 'Processed'))" ng-click="modify(timesheet.id)">Open</button>                                
+                                <button type="button" class="btn btn-primary" ng-if="user.type == 'Consultant' && (timesheet.TimesheetStatus == 'Pending' || timesheet.TimesheetStatus == 'Rejected')" ng-click="modify(timesheet.id)">Modify</button>
+                                <button type="button" class="btn btn-danger" ng-if="user.type == 'Consultant' && (timesheet.TimesheetStatus == 'Pending' || timesheet.TimesheetStatus == 'Rejected')" ng-click="confirmdelete(timesheet.id)">Delete</button>
+                            </div>
+                        </div>
+
+                        <div class="clearfix" />
+                        <hr />
+
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
